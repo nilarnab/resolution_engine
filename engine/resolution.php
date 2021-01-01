@@ -67,7 +67,8 @@ function resolution($premise1, $premise2, $neg_literal)
 <?php 
 function simplify_by_resolution($premises)
 {
-    
+    echo "primese recieved in main funcitno as \n";
+    print_r($premises);
     $neg_found_once = false;
     $appropriate_premise_found_once = false;
     foreach ($premises as $premise)
@@ -134,12 +135,15 @@ function simplify_by_resolution($premises)
                     
                     $resolved_val = resolution($temp_array, $temp_other, explode("<NEG>", $literal)[1]);
                     
-                    array_splice($premises, $negated_literal_index, 1);
-                    array_splice($premises, $cnt, 1);
                     
-                    echo "resoved value ".$resolved_val[0]." and ".$resolved_val[1]."\n";
+                    // echo "DELETING ".$premises[$negated_literal_index]." AND ".$premises[$cnt]." \n";
+                    //array_splice($premises, $negated_literal_index, 1);
+                    //array_splice($premises, $cnt - 1, 1);
                     
-                    if (($resolved_val[0]!= "") && ($resolved_val[1]!=""))
+                    echo "resoved value ".$resolved_val[0]." and ".$resolved_val[1]." ".strlen($resolved_val[0])."\n";
+                    
+                    $push = true;
+                    if ((strlen($resolved_val[0]) != 0) && (strlen($resolved_val[1])!=0))
                     {
                         echo "cond 1\n";
                         $new_premise = $resolved_val[0]."<OR>".$resolved_val[1];
@@ -153,17 +157,64 @@ function simplify_by_resolution($premises)
                             $new_premise = $resolved_val[0];
                         }
                         
-                        if (!empty($resolved_val[1]))
+                        else if (!empty($resolved_val[1]))
                         {
                             echo "cond 2.2\n";
                             $new_premise = $resolved_val[1];
                         }
+                        
+                        else
+                        {
+                            $push = false;
+                        }
+                            
                     }
                     
-                    $new_premise = $resolved_val[0]."<OR>".$resolved_val[1];
-                    array_push($premises, $new_premise);
+                    // $new_premise = $resolved_val[0]."<OR>".$resolved_val[1];
+                    if ($push)
+                    {
+                        array_push($premises, $new_premise);   
+                    }
                     
                     print_r($resolved_val);
+                    
+                    // making the new array
+                    $new_prm = [];
+                    
+                    
+                    print_r($premises);
+                    
+                    echo "not adding ".$param1." ".$param2."\n";
+                    foreach ($premises as $prem)
+                    {
+                        echo "ATTEMPTING TO ADD ".$prem." \n";
+                        if ($prem == $param1 or $prem == $param2)
+                        {
+                            
+                        }
+                        else
+                        {
+                            if (!in_array($prem, $new_prm))
+                            {
+                                array_push($new_prm, $prem);
+                            }
+                            
+                        }
+                    }
+                    
+                    // now adding the new premises
+                    if (!in_array($new_premise, $new_prm))
+                    {
+                        array_push($new_prm, $new_premise);
+                    }
+                    
+                    
+                    
+                    $premises = $new_prm;
+                    
+                    echo "NEW PREMISES FOUND AS \n";
+                    print_r($premises);
+                    
                     
                     // now the the param1 and param 2 are to be deleted
                     break;
@@ -197,7 +248,7 @@ else
 ?>
 
 <?php
-$premises = ["<NEG>C","<NEG>D", "<NEG>A<OR>B", "B<OR>C", "A<OR>C<OR>D"];
+$premises = ["<NEG>A", "A<OR>K<OR>C<OR>D", "<NEG>K", "T", "<NEG>T", "<NEG>C"];
 $premises = simplify_by_resolution($premises);
 
 echo "fully resolved premises \n";
