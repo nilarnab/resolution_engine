@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from sympy.logic.boolalg import to_cnf
 from sympy.logic import simplify_logic
 def toCnf(s):
