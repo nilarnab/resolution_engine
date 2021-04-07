@@ -1,3 +1,8 @@
+<?php
+    include 'file_controller.php';
+?>
+
+
 <?php 
 
     function resolution_util($premise)
@@ -248,6 +253,13 @@ else
 ?>
 
 <?php
+
+$inp = read_file('../text_files/test.txt');
+
+echo $inp;
+
+
+
 $premises = ["<NEG>A", "A<OR>K<OR>C<OR>D", "<NEG>K", "T", "<NEG>T", "<NEG>C"];
 $premises = simplify_by_resolution($premises);
 

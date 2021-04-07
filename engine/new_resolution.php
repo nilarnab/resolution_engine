@@ -1,4 +1,4 @@
-<?php 
+<?php
     function remove_premises($premises)  
     {
         $new_premises = [];
@@ -19,25 +19,31 @@
 
 <?php function intra_premise($s)
 {
+
+    if (strlen($s) == 0)
+    {
+        return [];
+    }
+
     $a = explode("<OR>", $s);
     
-    // echo "a \n";
+    // // echo"a \n";
     // print_r($a);
     $new = [];
     $del = [];
     
     for ($i = 0; $i < count($a); $i++)
     {
-        // echo "working on ".$a[$i]." \n";
+        // // echo"working on ".$a[$i]." \n";
         if (strpos($a[$i], "<NEG>") !== false)
         {
-            // echo "negation found \n";
+            // // echo"negation found \n";
             array_push($del, $a[$i]);
         }
     }
     
     // print_r($del);
-    // echo "\n";
+    // // echo"\n";
     
     for ($i = 0; $i < count($a); $i++)
     {
@@ -67,22 +73,22 @@
     function resolution_util($premise)
     {
         
-        // echo "resolution_util recieved ".sizeof($premise)."\n";
+        // // echo"resolution_util recieved ".sizeof($premise)."\n";
         // print_r($premise);
         for($i = 0; $i < sizeof($premise); $i++)
         {
-            // echo $i;
+            // // echo$i;
             if (empty($premise[$i]))
             {
                 // match found
-                // echo "match found \n";
+                // // echo"match found \n";
                 array_splice($premise, $i, 1);
                 
                 return resolution_util($premise);
             }
         }
         
-        // echo "returned \n";
+        // // echo"returned \n";
         // print_r($premise);
         
         return $premise;
@@ -95,23 +101,23 @@ function resolution($premise1, $premise2, $neg_literal)
 {
     // return resolved premises
     // $premise1 is negated
-    // echo "data recieved in resolutnion \n";
+    // // echo"data recieved in resolutnion \n";
     // print_r($premise1);
-    // echo "\n";
+    // // echo"\n";
     // print_r($premise2);
-    // echo "\n";
-    // echo $neg_literal."\n";
+    // // echo"\n";
+    // // echo$neg_literal."\n";
     
     $premise1 = explode("<OR>", $premise1);
     $premise2 = explode("<OR>", $premise2);
     
     for($i = 0; $i < sizeof($premise1); $i++)
     {
-        // echo "working on ".$premise1[$i]."\n";
+        // // echo"working on ".$premise1[$i]."\n";
         if (strpos($premise1[$i], $neg_literal) !== false)
         {
             // match found
-            // echo "match found \n";
+            // // echo"match found \n";
             array_splice($premise1, $i, 1);
         }
     }
@@ -174,9 +180,10 @@ function resolution($premise1, $premise2, $neg_literal)
 function simplify_by_resolution($premises)
 {
     
-    echo "primeses recievied as \n";
-    print_r($premises);
+    // echo"primeses recievied as \n";
+    // print_r($premises);
     
+   
     
     $work = false;
     $deletable = [];
@@ -185,7 +192,7 @@ function simplify_by_resolution($premises)
     for($l1 = 0; $l1 < count($premises); $l1 ++)
     {
         
-        // echo "premise 1 ".$premises[$l1]."\n";
+        // // echo"premise 1 ".$premises[$l1]."\n";
         //now exploding each premise
         $candidate = explode("<OR>", $premises[$l1]);
         
@@ -206,7 +213,7 @@ function simplify_by_resolution($premises)
                 for($l3 = 0; $l3 < count($premises); $l3 ++)
                 {
                     $poss_match = explode("<OR>", $premises[$l3]);
-                    //echo "checking in ".$premises[$l3]."\n";
+                    //// echo"checking in ".$premises[$l3]."\n";
                     
                     
                     // now loop for poss match
@@ -215,18 +222,18 @@ function simplify_by_resolution($premises)
                         
                         
                         // finding between $poss_match[$l4] == $findable
-                        //echo "finding between ".$poss_match[$l4]." and ".$findable."\n";
+                        //// echo"finding between ".$poss_match[$l4]." and ".$findable."\n";
                         
                         if ($poss_match[$l4] == $findable)
                         {
                             // match found
-                            echo "match is found between ".$premises[$l1]." and ".$premises[$l3]."\n";
+                            // echo"match is found between ".$premises[$l1]." and ".$premises[$l3]."\n";
                             
                             array_push($deletable, $premises[$l1]);
                             array_push($deletable, $premises[$l3]);
                             
                             
-                            // echo "omitting ".$findable."\n";
+                            // // echo"omitting ".$findable."\n";
                             $work = true;
                             
                             $ret = resolution($premises[$l1], $premises[$l3], $findable);
@@ -300,7 +307,7 @@ function simplify_by_resolution($premises)
         {
             if ($premises[$d1] == $deletable[0])
             {
-                // echo "deleting ".$deletable[0]."\n";
+                // // echo"deleting ".$deletable[0]."\n";
                 array_splice($premises, $d1, 1);
                 break;
             }
@@ -310,7 +317,7 @@ function simplify_by_resolution($premises)
         {
             if ($premises[$d2] == $deletable[1])
             {
-                //echo "deleting ".$deletable[1]."\n";
+                //// echo"deleting ".$deletable[1]."\n";
                 array_splice($premises, $d2, 1);
                 break;
             }
@@ -334,19 +341,33 @@ function simplify_by_resolution($premises)
 ?>
 
 <?php
-$premises = ["A<OR>B<OR>C<OR>D", "<NEG>A<OR>B", "<NEG>D<OR>B"];
-$premises = simplify_by_resolution($premises);
 
-echo "fully resolved premises \n";
+//$command = escapeshellcmd('./BIT.py');
+//$output = shell_exec($command);
+//// echo$output;
+//
+//
+//
+//$inp = read_file('../text_files/test');
+//
+//// echo"data recieved as \n";
+//
+//// echo$inp;
 
-print_r($premises);
+
+// $premises = ["A", "<NEG>A"];
+// $premises = simplify_by_resolution($premises);
+
+// echo"fully resolved premises \n";
+
+// print_r($premises);
 
 // $s = "<NEG>C";
-// echo intra_premise($s)."\n";
+// // echointra_premise($s)."\n";
 
 
-// echo intra_premise("<NEG>C<OR>B<OR>C<OR><NEG>B");
-// echo "\n";
+// // echointra_premise("<NEG>C<OR>B<OR>C<OR><NEG>B");
+// // echo"\n";
 
 
 

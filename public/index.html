@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- place for font awesome-->
+    <script src="https://kit.fontawesome.com/8fedbb90c1.js" crossorigin="anonymous"></script>
+
+
+    <script>
+        function fnctn() {
+            var text = document.getElementById("input").value;
+
+            $("#outp").load("ajax/load.php", {
+                inp: text
+            });
+        }
+    </script>
+
+
+</head>
+
+
+<style>
+    body {
+        background-color: f6f5f5;
+    }
+
+    .wrapper {
+        width: 80%;
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    h1 {
+        color: #276678;
+    }
+
+    p {
+        color: #1687a7;
+    }
+
+    textarea {
+        width: 100%;
+        height: 200px;
+        border-style: solid;
+        border-radius: 2px;
+        border-color: #1687a7;
+        border-width: 2px;
+        background-color: #d3e0ea;
+    }
+
+    ng {
+        color: green;
+    }
+
+    and {
+        color: red;
+        font-weight: 1500;
+    }
+
+    .output {
+        width: 100%;
+        height: 50px;
+        border-style: solid;
+        border-radius: 2px;
+        border-color: #1687a7;
+        border-width: 2px;
+        background-color: #d3e0ea;
+        font-weight: 1000;
+    }
+
+    .line {
+        width: 100%;
+        height: 2px;
+        background-color: #1687a7;
+        margin-bottom: 20px;
+    }
+
+    .col-2
+    {
+        text-align: center;
+    }
+
+    i
+    {
+        font-size: x-large;
+    }
+
+</style>
+
+<div class="wrapper">
+    <h1 class="text-5xl">
+        Resolution Engine
+    </h1>
+    <p>Convert CNF form into resolved premises</p>
+    <div class="line"></div>
+
+    <h1 class="text-xl">
+        Input string
+    </h1>
+
+    <textarea name="input" id="input" placeholder="" oninput="fnctn()">
+
+    </textarea>
+
+    <h1 class="text-xl">
+        Output
+    </h1>
+
+    <div class="output" id="outp">
+
+    </div>
+
+    <!-- <button class="btn btn-success" onclick="fnctn()">
+
+    </button> -->
+    <br>
+    <div class="line"></div>
+
+    <h1 class="text-xl">
+        Usage
+    </h1>
+
+    <p>For resolving resolutions such as<br>(A OR B) AND (~B)<br>The input should be given as<br>
+
+        <code>
+            A&ltOR>B<br>&ltNEG>B
+        </code>
+
+    </p>
+    <p>Not getting what is required? Well I am open to suggestions. Please have a go through the <a href="./known_issues.html">Knowns Issues</a></p>
+    <p align='center'>I am always open to make friends</p>
+    <div class="line">
+
+    </div>
+
+    <div class="row" align='center'>
+        <div class="col-2">
+
+        </div>
+        <div class="col-1">
+
+        </div>
+        <div class="col-2">
+            <a href="https://www.linkedin.com/in/nilarnabdebnath/"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="col-2">
+            <a href="https://www.instagram.com/nilarnab_debnath/"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="col-2">
+            <a href="mailto:nilarnabdebnath@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+        <div class="col-1">
+
+        </div>
+        <div class="col-2">
+
+        </div>
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

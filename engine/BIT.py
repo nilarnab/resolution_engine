@@ -1,3 +1,6 @@
+#!C:/Users/nilar/AppData/Local/Programs/Python/Python38-32/python.exe
+
+
 #!/usr/bin/env python
 from sympy.logic.boolalg import to_cnf
 from sympy.logic import simplify_logic
@@ -26,13 +29,18 @@ dictionary
  implies : >>
 '''
 
-myfile = "C:\\Users\hp\Downloads\College-Website-main\College-Website-main\lat\Images\cs.txt"
+myfile = "../text_files/test.txt"
 
 with open(myfile, "r+") as f:
     content = f.read()
-    cmds = content.split('<OR>')
+    cmds = content.split()
     for i in range(len(cmds)):
         cmds[i] = toCnf(cmds[i]) + '\n'
+
+    for i in range(len(cmds)):
+        cmds[i] = ((cmds[i].replace('~', '<NEG>')).replace('|', '<OR>')).replace('&', '<AND>')
+
     f.seek(0)
     f.writelines(cmds)
     f.truncate()
+
