@@ -1,0 +1,17 @@
+{
+  "name": "tail",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build-css": "tailwindcss build src/styles.css -o public/styles.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "global": "^4.4.0",
+    "live-server": "^1.2.1",
+    "tailwindcss": "^2.0.4"
+  }
+}

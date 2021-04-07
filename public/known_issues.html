@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <!-- place for font awesome-->
+    <script src="https://kit.fontawesome.com/8fedbb90c1.js" crossorigin="anonymous"></script>
+
+
+    <script>
+        function fnctn() {
+            var text = document.getElementById("input").value;
+
+            $("#outp").load("ajax/load.php", {
+                inp: text
+            });
+        }
+    </script>
+
+
+</head>
+
+
+<style>
+    body {
+        background-color: f6f5f5;
+        padding: 20px;
+    }
+
+    .wrapper {
+        width: 80%;
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    h1 {
+        color: #276678;
+    }
+
+    p {
+        color: #1687a7;
+    }
+
+    textarea {
+        width: 100%;
+        height: 200px;
+        border-style: solid;
+        border-radius: 2px;
+        border-color: #1687a7;
+        border-width: 2px;
+        background-color: #d3e0ea;
+    }
+
+    ng {
+        color: green;
+    }
+
+    and {
+        color: red;
+        font-weight: 1500;
+    }
+
+    .output {
+        width: 100%;
+        height: 50px;
+        border-style: solid;
+        border-radius: 2px;
+        border-color: #1687a7;
+        border-width: 2px;
+        background-color: #d3e0ea;
+        font-weight: 1000;
+    }
+
+    .line {
+        width: 100%;
+        height: 2px;
+        background-color: #1687a7;
+        margin-bottom: 20px;
+    }
+
+    .col-2
+    {
+        text-align: center;
+    }
+
+    i
+    {
+        font-size: x-large;
+    }
+
+</style>
+<body>
+
+    <h1 class='text-5xl'>
+        The known Issues
+    </h1>
+    
+    <ul>
+        <li>
+            In the trivial case A&ltOR>&ltNEG>A, the program does not give accurate result
+        </li>
+        <li>
+            In some cases, the program shows warning, these cases are rare, but are not completely removed
+        </li>
+    </ul>
+
+    <p>
+        If your issue is not among them, feel free to make me aware of the fact to nilarnabdebnath@gmail.com
+    </p>
+    <p>
+        PS: the code will be made public soon
+    </p>
+    
+</body>
+</html>
